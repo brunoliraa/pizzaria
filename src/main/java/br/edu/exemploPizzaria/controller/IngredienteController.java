@@ -1,5 +1,6 @@
 package br.edu.exemploPizzaria.controller;
 
+import br.edu.exemploPizzaria.IngredienteInvalidoException;
 import br.edu.exemploPizzaria.model.Ingrediente;
 import br.edu.exemploPizzaria.model.enumerators.CategoriaIngrediente;
 import br.edu.exemploPizzaria.model.repository.IngredienteRepository;
@@ -30,17 +31,16 @@ public class IngredienteController {
         }
         @PostMapping
         public String salvar(@Valid Ingrediente ingrediente, BindingResult result,
-                             RedirectAttributes attributes){
+                             Model model){
             //pode usar tbm  o ModelAtribbute no parametro do método
             if(result.hasErrors()){
-                FieldError error = result.getFieldErrors().get(0);
-                attributes.addFlashAttribute("MensagemErro", "Nao foi possivel salvar o ingrediente. "+
-                        error.getField()+""+error.getDefaultMessage());
+                throw new IngredienteInvalidoException();
             }else{
                 ingredienteRepository.save(ingrediente);
             }
-
-            return "redirect:/ingrediente";
+            model.addAttribute("ingredientes", ingredienteRepository.findAll());
+            model.addAttribute("categorias", CategoriaIngrediente.values());
+            return "tabela-ingredientes";
         }
 
     }

@@ -16,23 +16,7 @@
 
 <div class="container">
     <h2>Lista de ingredientes</h2>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>nome</th>
-            <th>categoria</th>
-            <th>id</th>
-        </tr>
-        </thead>
-        <tbody>
-            <tr th:each="ingredientes : ${ingredientes}">
-                <td th:text="${ingredientes.nome}"></td>
-                <td th:text="${ingredientes.categoria}"></td>
-                <td th:text="${ingredientes.id}"></td>
-            </tr>
-
-        </tbody>
-    </table>
+  <div id="secao-ingredientes" th:include="tabela-ingredientes.html"></div>
 </div>
 
 
@@ -48,7 +32,7 @@
 <div class="modal" id="modal-ingredientes">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="form-ingrediente" method="post" action="ingrediente">
+            <form id="form-ingredientes" method="post" action="ingrediente">
 
                 <!-- Modal Header -->
                 <div class="modal-header">
@@ -72,7 +56,7 @@
                 <!-- Modal footer -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">cancelar</button>
-                    <button type="submit" class="btn btn-primary" form="form-ingrediente"  >salvar</button>
+                    <button type="button" id="btn-salvar" class="btn btn-primary"  >salvar</button>
                 </div>
             </form>
 
@@ -80,6 +64,6 @@
     </div>
 </div>
 
-<div th:include="bb.html"></div>
+<script src="ingredientes.js"></script>
 </body>
 </html>
