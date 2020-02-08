@@ -59,10 +59,6 @@ public class Ingrediente {
 
     @Override
     public String toString() {
-        return "Ingrediente{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", categoria=" + categoria +
-                '}';
+        return this.nome +",";
     }
 }

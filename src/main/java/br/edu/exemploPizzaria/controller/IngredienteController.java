@@ -5,16 +5,15 @@ import br.edu.exemploPizzaria.model.Ingrediente;
 import br.edu.exemploPizzaria.model.enumerators.CategoriaIngrediente;
 import br.edu.exemploPizzaria.model.repository.IngredienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/ingrediente")
@@ -42,5 +41,22 @@ public class IngredienteController {
             model.addAttribute("categorias", CategoriaIngrediente.values());
             return "tabela-ingredientes";
         }
+
+        @DeleteMapping("/{id}")
+        public ResponseEntity<String>delete(@PathVariable Long id){
+        try{
+            ingredienteRepository.deleteById(id);
+            return new ResponseEntity<String>(HttpStatus.OK);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+        }
+        }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Optional<Ingrediente> buscarIngrediente(@PathVariable Long id){
+        Optional<Ingrediente> ingrediente = ingredienteRepository.findById(id);
+        return ingrediente;
+    }
 
     }

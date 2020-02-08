@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 public class Pizza {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @NotNull //funciona pra tudo que for objeto
     @NotEmpty // só funciona pra String
@@ -23,14 +23,14 @@ public class Pizza {
     @NotNull
     @Enumerated(EnumType.STRING)
     private CategoriaPizza categoria;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER) // é a pior opção porque sempre vai entregar os ingredientes
     private Set<Ingrediente> ingredientes;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -71,14 +71,13 @@ public class Pizza {
         if (this == o) return true;
         if (!(o instanceof Pizza)) return false;
         Pizza pizza = (Pizza) o;
-        return getId() == pizza.getId() &&
-                Objects.equals(getNome(), pizza.getNome()) &&
-                getCategoria() == pizza.getCategoria();
+        return Objects.equals(getNome(), pizza.getNome()) &&
+                Objects.equals(getPreco(), pizza.getPreco());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getNome(), getCategoria());
+        return Objects.hash(getNome(), getPreco());
     }
 
     @Override

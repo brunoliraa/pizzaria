@@ -4,18 +4,22 @@
 <table class="table">
     <thead>
     <tr>
+        <th>#</th>
         <th>nome</th>
+        <th>Preço</th>
         <th>categoria</th>
-        <th>id</th>
+        <th>Ingredientes</th>
         <th>Editar</th>
         <th>Deletar</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="ingredientes : ${ingredientes}" th:attr="data-id=${ingredientes.id}">
-        <td th:text="${ingredientes.nome}"></td>
-        <td th:text="${ingredientes.categoria}"></td>
-        <td th:text="${ingredientes.id}"></td>
+    <tr th:each="pizzas : ${pizzas}" th:attr="data-id=${pizzas.id}">
+        <td th:text="${pizzas.nome}"></td>
+        <td th:text="${pizzas.id}"></td>
+        <td th:text="${pizzas.preco}"></td>
+        <td th:text="${pizzas.categoria}"></td>
+        <td th:each="ingredientes : ${pizzas.ingredientes}" th:text="${ingredientes.nome}"></td>
         <td><button type="button" class="btn btn-warning btn-editar">Editar</button></td>
         <td><button type="button" class="btn btn-danger btn-deletar"> Deletar </button> </td>
     </tr>
