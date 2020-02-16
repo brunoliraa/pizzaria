@@ -3,16 +3,22 @@ package br.edu.exemploPizzaria.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.math.BigInteger;
+import java.util.List;
 
 @Document(collection = "cliente")
+
 public class Cliente {
     @Id
     private BigInteger id;
     private String nome;
     private String email;
     private String senha;
+
 
     public BigInteger getId() {
         return id;

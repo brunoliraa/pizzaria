@@ -21,9 +21,9 @@ public class ClienteController {
     }
 
     @PostMapping("/cliente")
-    public String salvarCliente(@RequestBody Cliente cliente){
+    public String salvarCliente(Cliente cliente){
             clienteRepository.save(cliente);
-        return "";
+        return "ok";
     }
     @GetMapping("/clientes")
     public String buscarTodos(){
@@ -35,5 +35,19 @@ public class ClienteController {
     public String buscarCliente(@PathVariable BigInteger id){
         clienteRepository.findById(id);
         return "";
+    }
+
+    @GetMapping("/login")
+    public String openLogin(){
+        return "cadastroCLiente";
+    }
+
+    @PostMapping("/login")
+    public String logar(Cliente cliente) {
+        Cliente c = clienteRepository.findByEmail(cliente.getEmail());
+        if (c.getSenha().equals(cliente.getSenha())) {
+            return "pizza/pizzas";
+        }else
+        return "redirect:cadastroCliente";
     }
 }

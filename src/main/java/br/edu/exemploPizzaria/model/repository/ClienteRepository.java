@@ -8,4 +8,5 @@ import java.math.BigInteger;
 
 @Repository
 public interface ClienteRepository extends MongoRepository<Cliente, BigInteger> {
+    Cliente findByEmail(String email);
 }
