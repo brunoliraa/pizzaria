@@ -6,7 +6,10 @@ import br.edu.exemploPizzaria.model.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.params.SetParams;
 
+import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
 
 @Controller
@@ -39,15 +42,26 @@ public class ClienteController {
 
     @GetMapping("/login")
     public String openLogin(){
-        return "cadastroCLiente";
+        return "clienteCadastro";
     }
 
     @PostMapping("/login")
-    public String logar(Cliente cliente) {
-        Cliente c = clienteRepository.findByEmail(cliente.getEmail());
-        if (c.getSenha().equals(cliente.getSenha())) {
-            return "pizza/pizzas";
-        }else
-        return "redirect:cadastroCliente";
+    public String logar(Cliente cliente, HttpSession session) {
+        try {
+            Cliente c = clienteRepository.findByEmail(cliente.getEmail());
+            session.setAttribute("cliente", c);
+            Jedis jedis =  new Jedis("127.0.0.1", 6379);
+            jedis.set(c.getEmail(),session.getId(), SetParams.setParams());
+
+            if (c.getSenha().equals(cliente.getSenha())) {
+                return "pizza/pizzas";
+            }
+            else return "clienteCadastro";
+        }catch(Exception ex){
+                System.out.println(ex.getMessage());
+                return "clienteCadastro";
+            }
+
+
+        }
     }
-}
