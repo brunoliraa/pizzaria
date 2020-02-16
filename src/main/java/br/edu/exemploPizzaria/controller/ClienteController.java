@@ -15,6 +15,11 @@ public class ClienteController {
     @Autowired
     ClienteRepository clienteRepository;
 
+    @GetMapping("/cadastro")
+    public String cadastro(){
+        return "clienteCadastro";
+    }
+
     @PostMapping("/cliente")
     public String salvarCliente(@RequestBody Cliente cliente){
             clienteRepository.save(cliente);
