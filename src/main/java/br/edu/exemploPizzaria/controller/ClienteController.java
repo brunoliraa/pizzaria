@@ -50,8 +50,8 @@ public class ClienteController {
         try {
             Cliente c = clienteRepository.findByEmail(cliente.getEmail());
             session.setAttribute("cliente", c);
-            Jedis jedis =  new Jedis("127.0.0.1", 6379);
-            jedis.set(c.getEmail(),session.getId(), SetParams.setParams());
+            //Jedis jedis =  new Jedis("127.0.0.1", 6379);
+            //jedis.set(c.getEmail(),session.getId(), SetParams.setParams());
 
             if (c.getSenha().equals(cliente.getSenha())) {
                 return "pizza/pizzas";
