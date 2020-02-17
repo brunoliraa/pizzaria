@@ -20,9 +20,9 @@
         <a href="#home" class="w3-bar-item w3-button">Pizza's Bar</a>
         <!-- Right-sided navbar links. Hide them on small screens -->
         <div class="w3-right w3-hide-small">
-            <a href="#about" class="w3-bar-item w3-button nav-bar-item">Menu</a>
-            <a href="#menu" class="w3-bar-item w3-button nav-bar-item">Login</a>
-            <a href="#contact" class="w3-bar-item w3-button nav-bar-item">Cadastre-se</a>
+            <a href="" class="w3-bar-item w3-button nav-bar-item">Menu</a>
+            <a href="" class="w3-bar-item w3-button nav-bar-item" data-toggle="modal" data-target="#modalLogin">Login</a>
+            <a href="" class="w3-bar-item w3-button nav-bar-item" data-toggle="modal" data-target="#modalCadastrar">Cadastre-se</a>
         </div>
     </div>
 </div>
@@ -47,6 +47,99 @@
         <p class="w3-large w3-text-grey w3-hide-medium">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     </div>
 </div>
+
+<!-- Modal Login -->
+<div class="modal fade" id="modalLogin">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Entre na sua conta</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form method="post" action="login" id="form-login">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" class="form-control" name="email" id="login-email">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-senha">Senha</label>
+                        <input type="password" class="form-control" name="senha" id="login-senha">
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox"> Remember me
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" form="form-login">Entrar</button>
+                </form>
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <a href="#modalCadastrar" data-toggle="modal" data-target="#modalLogin">
+                    Não tem uma conta? Cadastre-se grátis</a>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</div>
+
+<!-- Modal Cadastrar -->
+<div class="modal fade" id="modalCadastrar">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Cadastre-se</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form method="post" action="cliente" id="form-cadastrar">
+                    <div class="form-group">
+                        <label for="cadastrar-nome">Nome</label>
+                        <input type="text" class="form-control" name="nome" id="cadastrar-nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="cadastrar-email">Email</label>
+                        <input type="email" class="form-control" name="email" id="cadastrar-email">
+                    </div>
+                    <div class="form-group">
+                        <label for="cadastrar-senha">Senha</label>
+                        <input type="password" class="form-control" name="senha" id="cadastrar-senha">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" form="form-cadastrar">Cadastrar</button>
+                </form>
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                já tem uma conta?
+                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</div>
+
 <!--Footer-->
 <footer>
     <div class="row justify-content-center">

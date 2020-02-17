@@ -2,9 +2,13 @@ package br.edu.exemploPizzaria.controller;
 
 
 import br.edu.exemploPizzaria.model.Cliente;
+import br.edu.exemploPizzaria.model.enumerators.CategoriaPizza;
 import br.edu.exemploPizzaria.model.repository.ClienteRepository;
+import br.edu.exemploPizzaria.model.repository.IngredienteRepository;
+import br.edu.exemploPizzaria.model.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.params.SetParams;
@@ -17,6 +21,10 @@ public class ClienteController {
 
     @Autowired
     ClienteRepository clienteRepository;
+    @Autowired
+    PizzaRepository pizzaRepository;
+    @Autowired
+    IngredienteRepository ingredienteRepository;
 
     @GetMapping("/cadastro")
     public String cadastro(){
@@ -26,7 +34,7 @@ public class ClienteController {
     @PostMapping("/cliente")
     public String salvarCliente(Cliente cliente){
             clienteRepository.save(cliente);
-        return "ok";
+        return "pizza/pizzas";
     }
     @GetMapping("/clientes")
     public String buscarTodos(){
@@ -46,7 +54,7 @@ public class ClienteController {
     }
 
     @PostMapping("/login")
-    public String logar(Cliente cliente, HttpSession session) {
+    public String logar(Cliente cliente, HttpSession session, Model model) {
         try {
             Cliente c = clienteRepository.findByEmail(cliente.getEmail());
             session.setAttribute("cliente", c);
@@ -54,6 +62,9 @@ public class ClienteController {
             //jedis.set(c.getEmail(),session.getId(), SetParams.setParams());
 
             if (c.getSenha().equals(cliente.getSenha())) {
+                model.addAttribute("pizzas", pizzaRepository.findAll());
+                model.addAttribute("categorias", CategoriaPizza.values());
+                model.addAttribute("ingredientes", ingredienteRepository.findAll());
                 return "pizza/pizzas";
             }
             else return "clienteCadastro";
