@@ -27,10 +27,20 @@ public class ClienteController {
     IngredienteRepository ingredienteRepository;
 
     @PostMapping("/cliente")
-    public String salvarCliente(Cliente cliente){
-            clienteRepository.save(cliente);
-        return "pizza/pizzas";
+    public String salvarCliente(Cliente cliente,  HttpSession session, Model model){
+
+        clienteRepository.save(cliente);
+        session.setAttribute("cliente", cliente);
+        Jedis jedis =  new Jedis("127.0.0.1", 6379);
+        jedis.set(cliente.getEmail(),session.getId(), SetParams.setParams());
+
+        model.addAttribute("pizzas", pizzaRepository.findAll());
+        model.addAttribute("categorias", CategoriaPizza.values());
+        model.addAttribute("ingredientes", ingredienteRepository.findAll());
+
+            return "home";
     }
+
     @GetMapping("/clientes")
     public String buscarTodos(){
         clienteRepository.findAll();
@@ -49,8 +59,8 @@ public class ClienteController {
         try {
             Cliente c = clienteRepository.findByEmail(cliente.getEmail());
             session.setAttribute("cliente", c);
-            //Jedis jedis =  new Jedis("127.0.0.1", 6379);
-            //jedis.set(c.getEmail(),session.getId(), SetParams.setParams());
+            Jedis jedis =  new Jedis("127.0.0.1", 6379);
+            jedis.set(c.getEmail(),session.getId(), SetParams.setParams());
 
             if (c.getSenha().equals(cliente.getSenha())) {
                 model.addAttribute("pizzas", pizzaRepository.findAll());
@@ -64,6 +74,15 @@ public class ClienteController {
                 return "index";
             }
 
+
+        }
+        @GetMapping("/logout")
+         public String logout(HttpSession session){
+            session.getAttribute("cliente");
+//            Jedis jedis =  new Jedis("127.0.0.1", 6379);
+//            jedis.del();
+            session.invalidate();
+            return "index";
 
         }
 

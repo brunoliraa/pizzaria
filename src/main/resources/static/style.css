@@ -38,6 +38,11 @@ hr.socket{
     width:100%
 }
 
+#pizzas {
+    margin-top: 70px;
+    margin-right: 10px;
+}
+
 /*  ---- Modal ---- */
 .modal-header, .modal-body, .modal-footer {
     background-color: #202020;
