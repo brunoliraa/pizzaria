@@ -10,10 +10,9 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Pizza> pizzas;
+    private List<Pizza> pizzas;
 
     private String recebedor;
-
 
     public Long getId() {
         return id;
@@ -23,11 +22,11 @@ public class Pedido {
         this.id = id;
     }
 
-    public Set<Pizza> getPizzas() {
+    public List<Pizza> getPizzas() {
         return pizzas;
     }
 
-    public void setPizzas(Set<Pizza> pizzas) {
+    public void setPizzas(List<Pizza> pizzas) {
         this.pizzas = pizzas;
     }
 
