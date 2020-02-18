@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+<body>
+
+<!--NavBar-->
+<div class="w3-top">
+    <div class="nav-bar" style="letter-spacing:4px;">
+        <a href="#home" class="w3-bar-item w3-button">Pizza's Bar</a>
+        <!-- Right-sided navbar links. Hide them on small screens -->
+        <div class="w3-right w3-hide-small">
+            <a href="" class="w3-bar-item w3-button nav-bar-item">Menu</a>
+            <a href="" class="w3-bar-item w3-button nav-bar-item" data-toggle="modal" data-target="#modalLogin">Meus pedidos</a>
+            <a href="" class="w3-bar-item w3-button nav-bar-item" data-toggle="modal" data-target="#modalCadastrar" >Logout</a>
+        </div>
+    </div>
+</div>
+
+<!-- Menu Section -->
+<div class="w3-row w3-padding-64" id="menu">
+    <div class="w3-col l6 w3-padding-large">
+        <h1 class="w3-center">Our Menu</h1><br>
+        <h4>Bread Basket</h4>
+        <p class="w3-text-grey">Assortment of fresh baked fruit breads and muffins 5.50</p><br>
+
+        <h4>Honey Almond Granola with Fruits</h4>
+        <p class="w3-text-grey">Natural cereal of honey toasted oats, raisins, almonds and dates 7.00</p><br>
+
+        <h4>Belgian Waffle</h4>
+        <p class="w3-text-grey">Vanilla flavored batter with malted flour 7.50</p><br>
+
+        <h4>Scrambled eggs</h4>
+        <p class="w3-text-grey">Scrambled eggs, roasted red pepper and garlic, with green onions 7.50</p><br>
+
+        <h4>Blueberry Pancakes</h4>
+        <p class="w3-text-grey">With syrup, butter and lots of berries 8.50</p>
+    </div>
+
+    <div class="w3-col l6 w3-padding-large">
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>nome</th>
+                <th>Preço</th>
+                <th>categoria</th>
+                <th>Ingredientes</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pizzas : ${pizzas}" th:attr="data-id=${pizzas.id}">
+                <td th:text="${pizzas.nome}"></td>
+                <td th:text="${pizzas.preco}"></td>
+                <td th:text="${pizzas.categoria}"></td>
+                <td><span th:each="ingredientes : ${pizzas.ingredientes}" th:text="${ingredientes.toString()}"></span></td>
+                <td><a class="btn btn-secondary" th:href="@{/adicionarpizza/{id}(id=${pizzas.id})}"  role="button">Selecionar</a></td>
+
+
+            </tr>
+
+
+
+            </tbody>
+
+        </table>
+        <form method="post" action="">
+            <button class="btn btn-dark" type="button" data-toggle="modal" data-target="#carrinhoModal">Finalizar pedido</button>
+        </form>
+    </div>
+</div>
+
+
+<!--Footer-->
+<footer>
+    <div class="row justify-content-center">
+        <div class="col-md-5 text-center">
+            <p>At our course is a collection of design and development solutions that
+                represent everything your businessneeds to compet in the modern marketplace.
+            </p>
+            <strong>Contact info</strong>
+            <p>(888)888-8888<br>email@nuno.com</p>
+            <a href="#" target="_blank"><i class="fab fa-facebook-square"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter-square"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <hr class="socket">&copy;Pizza's Bar.
+    </div><!--end of row-->
+
+</footer>
+
+
+
+
+<!-- The Modal -->
+<div class="modal" id="carrinhoModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="form-pedido" method="post" action="finalizarpedido">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Carrinho</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <label for="recebedor">Recebedor</label>
+                    <input id="recebedor" class="form-control" name="recebedor">
+
+                    <label for="pizzas">Pizzas: </label>
+                    <select  id="pizzas" name="pizzas" class="form-control" multiple="multiple">
+
+                        <option th:each=" pizzas : ${listaPizzas}" th:value="${pizzas}" th:text="${pizzas}" >
+                            <p th:text="${pizzas}"></p> </option>
+
+
+                    </select>
+
+                    <input type="hidden" id="id" name="id">
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="btn-editar" data-dismiss="modal">cancelar</button>
+                    <button type="submit" id="btn-salvar" class="btn btn-primary" form="form-pedido">Comprar</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

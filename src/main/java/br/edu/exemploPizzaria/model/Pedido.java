@@ -2,14 +2,17 @@ package br.edu.exemploPizzaria.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Pedido {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Pizza> pizzas;
+    private Set<Pizza> pizzas;
 
+    private String recebedor;
 
 
     public Long getId() {
@@ -20,12 +23,28 @@ public class Pedido {
         this.id = id;
     }
 
-    public List<Pizza> getPizzas() {
+    public Set<Pizza> getPizzas() {
         return pizzas;
     }
 
-    public void setPizzas(List<Pizza> pizzas) {
+    public void setPizzas(Set<Pizza> pizzas) {
         this.pizzas = pizzas;
     }
 
+    public String getRecebedor() {
+        return recebedor;
+    }
+
+    public void setRecebedor(String recebedor) {
+        this.recebedor = recebedor;
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "id=" + id +
+                ", pizzas=" + pizzas +
+                ", recebedor='" + recebedor + '\'' +
+                '}';
+    }
 }

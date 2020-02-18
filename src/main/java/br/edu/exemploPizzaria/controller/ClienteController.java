@@ -26,11 +26,6 @@ public class ClienteController {
     @Autowired
     IngredienteRepository ingredienteRepository;
 
-    @GetMapping("/cadastro")
-    public String cadastro(){
-        return "clienteCadastro";
-    }
-
     @PostMapping("/cliente")
     public String salvarCliente(Cliente cliente){
             clienteRepository.save(cliente);
@@ -48,10 +43,6 @@ public class ClienteController {
         return "";
     }
 
-    @GetMapping("/login")
-    public String openLogin(){
-        return "clienteCadastro";
-    }
 
     @PostMapping("/login")
     public String logar(Cliente cliente, HttpSession session, Model model) {
@@ -65,14 +56,16 @@ public class ClienteController {
                 model.addAttribute("pizzas", pizzaRepository.findAll());
                 model.addAttribute("categorias", CategoriaPizza.values());
                 model.addAttribute("ingredientes", ingredienteRepository.findAll());
-                return "pizza/pizzas";
+                return "home";
             }
-            else return "clienteCadastro";
+            else return "index";
         }catch(Exception ex){
                 System.out.println(ex.getMessage());
-                return "clienteCadastro";
+                return "index";
             }
 
 
         }
+
+
     }
