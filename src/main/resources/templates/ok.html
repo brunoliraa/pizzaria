@@ -26,19 +26,38 @@
 <div class="jumbotron">
 <form method="post" action="finalizarpedido">
 <label for="recebedor">Recebedor</label>
-<input id="recebedor" class="form-control" name="recebedor">
-
-<label for="pizzas">Pizzas: </label>
-<select  id="pizzas" name="pizzas" class="form-control" multiple="multiple">
-
-    <option th:each=" pizzas : ${listapizzas}" th:value="${pizzas}" th:text="${pizzas}" >
-        <p th:text="${pizzas}"></p> </option>
+<input type="text" id="recebedor" class="form-control" name="recebe">
 
 
 
 
-</select>
+    <table id="listapizzas" class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Pizza</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each=" pizzas : ${listaPizzas}" name="listaPizza" th:attr="data-id=${pizzas.id}">
+            <td th:text="${pizzas.nome}"></td>
+            <td th:text="${pizzas.quantidade}"></td>
+            <td th:text="${pizzas.preco}"></td>
+            <td><a class="btn btn-secondary" th:href="@{/alterarQuantidade/{id}/{acao}(id=${pizzas.id},acao=${1})}"  role="button">+</a>
+                <a class="btn btn-secondary" th:href="@{/alterarQuantidade/{id}/{acao}(id=${pizzas.id},acao=${0})}"  role="button">-</a></td>
+            <td><a class="btn btn-danger" th:href="@{/removerPizza/{id}(id=${pizzas.id})}"  role="button">remove</a></td>
+
+        </tr>
+
+        </tbody>
+  </table>
+
+    <p th:text="${total}"> valor total</p>
+    <p th:text="frete">frete: </p>
+    <p th:text="valorTotal">valor total:</span> </p>
+
     <button class="btn btn-dark" type="submit"> Comprar </button>
+    <a href="/continuar">continuar comprando</a>
 </form>
 </div>
 
@@ -46,7 +65,7 @@
     <div class="row justify-content-center">
         <div class="col-md-5 text-center">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                ut labore et dolore magna aliqua.
+
             </p>
             <strong>Contact info</strong>
             <p>(99)9999-9999<br>pizzasbar@email.com</p>

@@ -17,4 +17,5 @@ public class ExemploPizzariaApplication {
 		SpringApplication.run(ExemploPizzariaApplication.class, args);
 	}
 
+
 }

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:spring="http://www.w3.org/1999/XSL/Transform">
 <head>
     <meta charset="UTF-8">
     <title>Pizzaria</title>
@@ -15,7 +15,7 @@
 
 <body>
 <div class="container">
-    <h2>Lista de ingredientes</h2>
+    <h2>Lista de ingredientes <spring:message code="views.menu.ingredientes"/></h2>
   <div id="secao-ingredientes" th:include="tabela-ingredientes.html"></div>
 </div>
 

@@ -8,20 +8,20 @@ import br.edu.exemploPizzaria.model.enumerators.CategoriaPizza;
 import br.edu.exemploPizzaria.model.repository.IngredienteRepository;
 import br.edu.exemploPizzaria.model.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import br.edu.exemploPizzaria.propertyeditors.IngredientePropertyEditor;
 
 import javax.validation.Valid;
 
 
 @Controller
+
 public class PizzaController {
     @Autowired
     private IngredientePropertyEditor ingredientePropertyEditor;
@@ -54,6 +54,25 @@ public class PizzaController {
         }
         model.addAttribute("pizzas", pizzaRepository.findAll());
         return "tabela-pizzas";
+    }
+
+    @DeleteMapping("/pizza/{pizzaId}")
+    public ResponseEntity<String> deletarPizza(@PathVariable Long pizzaId){
+        try {
+            pizzaRepository.deleteById(pizzaId);
+            return new ResponseEntity<String>(HttpStatus.OK);
+
+        } catch (Exception ex) {
+            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+
+        }
+
+    }
+
+    @GetMapping("/pizza/{pizzaId}")
+    public ResponseEntity<Pizza> buscarPizza(@PathVariable Long pizzaId){
+        Pizza pizza = pizzaRepository.findPizzaById(pizzaId);
+        return new ResponseEntity<>(pizza, HttpStatus.OK);
     }
 
     @InitBinder

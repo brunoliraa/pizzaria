@@ -11,7 +11,7 @@ var limparModal = function(){
     $('#categoria').val('');
 };
 
-var  aplicatListenerBtnSalvar = function () {
+var  aplicarListeners = function () {
     $('.btn-deletar').on('click', function () {
         var id = $(this).parents('tr').data('id');
         $.ajax({
@@ -38,14 +38,13 @@ var  aplicatListenerBtnSalvar = function () {
                 $('#categoria').val(ingredientes.categoria);
 
                 $('#modal-ingredientes').modal('show');
-                aplicatListenerBtnSalvar();
                 aplicarListeners();
 
             });
     });
 }
 
-    var aplicarListeners = function(){
+    var aplicatListenerBtnSalvar = function(){
     $('#btn-salvar').on('click', function () {
         var url = 'ingrediente';
         var dadosIngrediente = $('#form-ingredientes').serialize();
@@ -54,7 +53,7 @@ var  aplicatListenerBtnSalvar = function () {
             .done(function (pagina) {
                 //alert("salvo com sucesso");
                 $('#secao-ingredientes').html(pagina)
-                aplicatListenerBtnSalvar();
+                aplicarListeners();;
 
 
 

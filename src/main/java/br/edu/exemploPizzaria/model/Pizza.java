@@ -6,6 +6,9 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.Set;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -23,9 +26,10 @@ public class Pizza {
     @NotNull
     @Enumerated(EnumType.STRING)
     private CategoriaPizza categoria;
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToMany(fetch = FetchType.EAGER) // é a pior opção porque sempre vai entregar os ingredientes
     private Set<Ingrediente> ingredientes;
-
+    private int quantidade =0;
     public Long getId() {
         return id;
     }
@@ -64,6 +68,14 @@ public class Pizza {
 
     public void setIngredientes(Set<Ingrediente> ingredientes) {
         this.ingredientes = ingredientes;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
     @Override
