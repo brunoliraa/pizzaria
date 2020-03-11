@@ -7,6 +7,7 @@ import br.edu.exemploPizzaria.model.repository.ClienteRepository;
 import br.edu.exemploPizzaria.model.repository.IngredienteRepository;
 import br.edu.exemploPizzaria.model.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class ClienteController {
 
     @PostMapping("/cliente")
     public String salvarCliente(Cliente cliente,  HttpSession session, Model model){
-
+       // cliente.setSenha(new BCryptPasswordEncoder().encode(cliente.getSenha()));
         clienteRepository.save(cliente);
         session.setAttribute("cliente", cliente);
 //        Jedis jedis =  new Jedis("127.0.0.1", 6379);
