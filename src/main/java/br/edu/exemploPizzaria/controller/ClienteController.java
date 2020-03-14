@@ -8,9 +8,11 @@ import br.edu.exemploPizzaria.model.repository.IngredienteRepository;
 import br.edu.exemploPizzaria.model.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.params.SetParams;
 
@@ -29,7 +31,7 @@ public class ClienteController {
 
     @PostMapping("/cliente")
     public String salvarCliente(Cliente cliente,  HttpSession session, Model model){
-       // cliente.setSenha(new BCryptPasswordEncoder().encode(cliente.getSenha()));
+       cliente.setSenha(new BCryptPasswordEncoder().encode(cliente.getSenha()));
         clienteRepository.save(cliente);
         session.setAttribute("cliente", cliente);
 //        Jedis jedis =  new Jedis("127.0.0.1", 6379);
@@ -77,7 +79,7 @@ public class ClienteController {
 
 
         }
-        @GetMapping("/logout")
+        @GetMapping("/logoutuseless")
          public String logout(HttpSession session){
             session.getAttribute("cliente");
 //            Jedis jedis =  new Jedis("127.0.0.1", 6379);
@@ -87,5 +89,13 @@ public class ClienteController {
 
         }
 
+        @GetMapping("/home")
+        public ModelAndView goHome(){
+            ModelAndView model = new ModelAndView("home");
+            model.addObject("pizzas", pizzaRepository.findAll());
+            model.addObject("categorias", CategoriaPizza.values());
+            model.addObject("ingredientes", ingredienteRepository.findAll());
+            return model;
+        }
 
     }
