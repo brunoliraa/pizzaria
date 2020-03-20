@@ -1,18 +1,16 @@
 package br.edu.exemploPizzaria.controller;
 
-import br.edu.exemploPizzaria.model.Compra;
-import br.edu.exemploPizzaria.model.Ingrediente;
-import br.edu.exemploPizzaria.model.Pedido;
-import br.edu.exemploPizzaria.model.Pizza;
+import br.edu.exemploPizzaria.model.*;
 import br.edu.exemploPizzaria.model.enumerators.CategoriaPizza;
-import br.edu.exemploPizzaria.model.repository.CompraRepository;
-import br.edu.exemploPizzaria.model.repository.IngredienteRepository;
-import br.edu.exemploPizzaria.model.repository.PedidoRepository;
-import br.edu.exemploPizzaria.model.repository.PizzaRepository;
+import br.edu.exemploPizzaria.model.repository.*;
 import br.edu.exemploPizzaria.propertyeditors.PizzaPropertyEditor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -32,10 +30,11 @@ import java.util.stream.Collector;
 
 @Controller
 public class PedidoController {
-    Pedido pedido;
-    Compra compra;
-    BigDecimal total = new BigDecimal(0);
-    List<Pizza> lista = new ArrayList<>();
+    private Pedido pedido;
+    private Compra compra;
+    private BigDecimal total = new BigDecimal(0);
+    private List<Pizza> lista = new ArrayList<>();
+    private Cliente cliente;
     @Autowired
     PizzaRepository pizzaRepository;
     @Autowired
@@ -47,11 +46,14 @@ public class PedidoController {
 
     @Autowired
     CompraRepository compraRepository;
+    @Autowired
+    ClienteRepository clienteRepository;
 
     @GetMapping("/adicionarpizza/{id}")
     public String adicionarPizza(@PathVariable Long id, Model model) {
         //System.out.println(id);
         Pizza p = pizzaRepository.findPizzaById(id);
+        buscarUsuario();
 
         int quantidade =0;
         quantidade ++;
@@ -76,6 +78,8 @@ public class PedidoController {
         model.addAttribute("ingredientes", ingredienteRepository.findAll());
         model.addAttribute("listaPizzas", lista);
         model.addAttribute("total", total);
+        model.addAttribute("cliente",cliente);
+        System.out.println(cliente.getNome());
         return "ok";
     }
 
@@ -108,6 +112,9 @@ public class PedidoController {
             compraRepository.save(compra);
             model.addAttribute("listaPizzas", lista);
 
+
+
+
             return "pedidoFinalizado";
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -117,8 +124,11 @@ public class PedidoController {
 
     @GetMapping("/carrinho")
     public ModelAndView exibirHome(){
+        buscarUsuario();
         ModelAndView modelAndView = new ModelAndView("ok");
         modelAndView.addObject("listapizzas",lista);
+        modelAndView.addObject("cliente", cliente);
+
 
         return modelAndView;
     }
@@ -157,13 +167,14 @@ public class PedidoController {
             model.addAttribute("ingredientes", ingredienteRepository.findAll());
             model.addAttribute("listaPizzas", lista);
             model.addAttribute("total", total);
-            return modelAndView;
+            return exibirHome();
+            //return modelAndView;
         }
 
 
     
     @GetMapping("/removerPizza/{id}")
-    public String removerPizza(@PathVariable Long id, Model model){
+    public ModelAndView removerPizza(@PathVariable Long id, Model model){
         Pizza pizza =pizzaRepository.findPizzaById(id);
         for(Pizza p : lista){
             if(p.getId().equals(pizza.getId())){
@@ -183,12 +194,17 @@ public class PedidoController {
 
 
 
-        model.addAttribute("pizzas", pizzaRepository.findAll());
-        model.addAttribute("categorias", CategoriaPizza.values());
-        model.addAttribute("ingredientes", ingredienteRepository.findAll());
-        model.addAttribute("listaPizzas", lista);
-        model.addAttribute("total", total);
-        return "ok";
+        return exibirHome();
+    }
+
+    //fazer isso em um service
+    private void buscarUsuario(){
+      //importação do Spring
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(!(authentication instanceof AnonymousAuthenticationToken)){
+            String email = authentication.getName();
+            cliente = clienteRepository.findByEmail(email);
+        }
     }
 
 

@@ -10,6 +10,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,8 +24,12 @@ public class Cliente implements UserDetails {
     private static final long serialVersionUID = 1L;
     @Id
     private BigInteger id;
+    @NotBlank(message = "nome não pode estar vazio")
     private String nome;
+    @Email(message = "email inválido")
     private String email;
+    @NotBlank(message = "a senha não pode estar vazia")
+    @Size(min = 6,message = "minimo de 6 caracteres")
     private String senha;
 
     public Cliente(){};

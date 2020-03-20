@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" >
 <head>
+    <!-- th:lang=”${#locale.language}” -->
+    <!--th:with="lang=${#locale.language}" th:lang="${lang}"-->
     <meta charset="UTF-8">
     <title>Pizza's Bar</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -10,8 +12,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 </head>
 <body>
 
@@ -20,7 +23,7 @@
         <a href="#home" class="w3-bar-item w3-button">Pizza's Bar</a>
         <!-- Right-sided navbar links. Hide them on small screens -->
         <div class="w3-right w3-hide-small">
-            <a href="" class="w3-bar-item w3-button nav-bar-item">Menu</a>
+            <a href="http://localhost:8080/pizzaria?lang=pt" class="w3-bar-item w3-button nav-bar-item">Menu</a>
             <a href="" class="w3-bar-item w3-button nav-bar-item" data-toggle="modal" data-target="#modalLogin">Login</a>
             <a href="" class="w3-bar-item w3-button nav-bar-item" data-toggle="modal" data-target="#modalCadastrar">Cadastre-se</a>
         </div>
@@ -41,7 +44,7 @@
     </div>
 
     <div class="w3-col m6 w3-padding-large">
-        <h1 class="w3-center">About Pizza's Bar</h1><br>
+        <h1 class="w3-center" >About Pizza's Bar</h1><h1 th:text="#{ola}"> </h1><br>
         <h5 class="w3-center">Desde 2020</h5>
         <p class="w3-large">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Facilisi etiam dignissim diam quis. Suspendisse potenti nullam ac tortor.
@@ -104,12 +107,18 @@
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">Cadastre-se</h4>
+
+
+
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form method="post" action="cliente" id="form-cadastrar">
+                <form method="post" action="cliente" th:object="${cliente}" id="form-cadastrar">
+                    <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+                        <div th:each="detailedError: ${#fields.detailedErrors()}">
+                            <span th:text="${detailedError.message}"></span></div></div>
                     <div class="form-group">
                         <label for="cadastrar-nome">Nome</label>
                         <input type="text" class="form-control" name="nome" id="cadastrar-nome">

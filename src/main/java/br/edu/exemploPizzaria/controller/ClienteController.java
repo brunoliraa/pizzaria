@@ -8,19 +8,24 @@ import br.edu.exemploPizzaria.model.repository.IngredienteRepository;
 import br.edu.exemploPizzaria.model.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.params.SetParams;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.math.BigInteger;
 
 @Controller
 public class ClienteController {
+
 
     @Autowired
     ClienteRepository clienteRepository;
@@ -30,8 +35,16 @@ public class ClienteController {
     IngredienteRepository ingredienteRepository;
 
     @PostMapping("/cliente")
-    public String salvarCliente(Cliente cliente,  HttpSession session, Model model){
-       cliente.setSenha(new BCryptPasswordEncoder().encode(cliente.getSenha()));
+    public String salvarCliente(@Valid Cliente cliente, HttpSession session, Model model,
+                                BindingResult result, RedirectAttributes attributes){
+       if(result.hasErrors()){
+
+           attributes.addFlashAttribute("mensagem","Erro ao cadastrar");
+           return "index";
+
+       }
+
+        cliente.setSenha(new BCryptPasswordEncoder().encode(cliente.getSenha()));
         clienteRepository.save(cliente);
         session.setAttribute("cliente", cliente);
 //        Jedis jedis =  new Jedis("127.0.0.1", 6379);
@@ -97,5 +110,7 @@ public class ClienteController {
             model.addObject("ingredientes", ingredienteRepository.findAll());
             return model;
         }
+
+
 
     }

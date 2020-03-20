@@ -19,7 +19,7 @@
 <!--NavBar-->
 <div class="w3-top">
     <div class="nav-bar" style="letter-spacing:4px;">
-        <a href="#home" class="w3-bar-item w3-button">Pizza's Bar</a>
+        <a href="/home" class="w3-bar-item w3-button">Pizza's Bar</a>
 
     </div>
 </div>
@@ -51,7 +51,7 @@
 
         </tbody>
   </table>
-
+    <p th:text="${cliente.getNome()}"></p>
     <p th:text="${total}"> valor total</p>
     <p th:text="frete">frete: </p>
     <p th:text="valorTotal">valor total:</span> </p>
@@ -59,6 +59,33 @@
     <button class="btn btn-dark" type="submit"> Comprar </button>
     <a href="/continuar">continuar comprando</a>
 </form>
+</div>
+<div class="container">
+    <form method="post"  action="/pay">
+        <div class="col-50">
+            <h3>Payment</h3>
+            <label>Accepted Cards</label>
+            <div class="icon-container">
+                <i class="fa fa-cc-visa" style="color:navy;"></i>
+                <i class="fa fa-cc-amex" style="color:blue;"></i>
+                <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                <i class="fa fa-cc-discover" style="color:orange;"></i>
+            </div>
+            <label for="price">Total</label>
+            <input type="text" id="price" name="price">
+            <label for="currency">Currency</label>
+            <input type="text" id="currency" name="currency" placeholder="Enter Currency">
+            <label for="method">Payment Method</label>
+            <input type="text" id="method" name="method" placeholder="Payment Method">
+            <label for="intent">Intent</label>
+            <input type="text" id="intent" name="intent" value="sale">
+            <label for="description">Payment Description</label>
+            <input type="text" id="description" name="description" placeholder="Payment Description">
+
+        </div>
+
+        <input type="submit" value="Continue to checkout" class="btn">
+    </form>
 </div>
 
 <footer>
