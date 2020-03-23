@@ -128,6 +128,8 @@ public class PedidoController {
         ModelAndView modelAndView = new ModelAndView("ok");
         modelAndView.addObject("listapizzas",lista);
         modelAndView.addObject("cliente", cliente);
+        modelAndView.addObject("total",total);
+        //modelAndView.addObject()
 
 
         return modelAndView;
@@ -148,15 +150,23 @@ public class PedidoController {
         for (Pizza p : lista) {
             if (p.getId().equals(id)) {
                 if (acao == 1) {
-                    Pizza pizza = pizzaRepository.findPizzaById(id);
+                  //  Pizza pizza = pizzaRepository.findPizzaById(id);
                     p.setQuantidade(p.getQuantidade() + 1);
-                    total = total.add(pizza.getPreco());
+                    total = total.add(p.getPreco());
+                    break;
                 } else
                     p.setQuantidade(p.getQuantidade() - 1);
-                if (total.compareTo(BigDecimal.ZERO) > 0) {
-                    total = total.subtract(p.getPreco());
-                } else
-                    total = total.add(new BigDecimal(0));
+                total = total.subtract(p.getPreco());
+                if(p.getQuantidade()==0){
+                    lista.remove(p);
+                }
+                if(total.compareTo(BigDecimal.ZERO) ==0){
+                    total = new BigDecimal(0);
+                }
+                if(total.compareTo(BigDecimal.ZERO)<0){
+                    total= new BigDecimal(0);
+                }
+
 
                 break;
             }
@@ -174,28 +184,40 @@ public class PedidoController {
 
     
     @GetMapping("/removerPizza/{id}")
-    public ModelAndView removerPizza(@PathVariable Long id, Model model){
-        Pizza pizza =pizzaRepository.findPizzaById(id);
+    public ModelAndView removerPizza(@PathVariable Long id, Model model) {
+        Pizza pizza = pizzaRepository.findPizzaById(id);
+        int quantidade=1;
         for(Pizza p : lista){
-            if(p.getId().equals(pizza.getId())){
-                lista.remove(pizza);
+            if(p.getId() ==id){
+            quantidade= p.getQuantidade();
+            System.out.println(p.getQuantidade());}
+        }
+        BigDecimal valorRemovido = pizza.getPreco();
+        valorRemovido =valorRemovido.multiply(new BigDecimal(quantidade));
+        total = total.subtract(valorRemovido);
+        System.out.println(total);
+        pizza.setQuantidade(0);
+        lista.remove(pizza);
 
-                if(total.compareTo(BigDecimal.ZERO)>0) {
-                    total = total.subtract(p.getPreco().multiply(new BigDecimal(p.getQuantidade())));
-                    if (total.compareTo(BigDecimal.ZERO)==0){
-                        total = new BigDecimal(0);
-                    }
-                }else
-                total = new BigDecimal(0);
+                if (total.compareTo(BigDecimal.ZERO) < 0) {
 
-            }
-            break;
+                    total = new BigDecimal(0);
                 }
+                if(lista.isEmpty()){
+                    total = new BigDecimal(0);
+                }
+        model.addAttribute("pizzas", pizzaRepository.findAll());
+        model.addAttribute("categorias", CategoriaPizza.values());
+        model.addAttribute("ingredientes", ingredienteRepository.findAll());
+        model.addAttribute("listaPizzas", lista);
+        model.addAttribute("total", total);
+                return exibirHome();
+            }
 
 
 
-        return exibirHome();
-    }
+
+
 
     //fazer isso em um service
     private void buscarUsuario(){
