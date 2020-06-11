@@ -2,10 +2,12 @@ package br.edu.exemploPizzaria.controller;
 
 
 import br.edu.exemploPizzaria.model.Cliente;
+import br.edu.exemploPizzaria.model.Mensagem;
 import br.edu.exemploPizzaria.model.enumerators.CategoriaPizza;
 import br.edu.exemploPizzaria.model.repository.ClienteRepository;
 import br.edu.exemploPizzaria.model.repository.IngredienteRepository;
 import br.edu.exemploPizzaria.model.repository.PizzaRepository;
+import br.edu.exemploPizzaria.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,9 @@ import redis.clients.jedis.params.SetParams;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class ClienteController {
@@ -33,6 +38,8 @@ public class ClienteController {
     PizzaRepository pizzaRepository;
     @Autowired
     IngredienteRepository ingredienteRepository;
+    @Autowired
+    private EmailService emailService;
 
     @PostMapping("/cliente")
     public String salvarCliente(@Valid Cliente cliente, HttpSession session, Model model,
@@ -43,12 +50,22 @@ public class ClienteController {
            return "index";
 
        }
-
         cliente.setSenha(new BCryptPasswordEncoder().encode(cliente.getSenha()));
         clienteRepository.save(cliente);
         session.setAttribute("cliente", cliente);
 //        Jedis jedis =  new Jedis("127.0.0.1", 6379);
 //        jedis.set(cliente.getEmail(),session.getId(), SetParams.setParams());
+
+        /* ---------teste email -----------*/
+        Map<String, Object> map = new HashMap<>();
+        Mensagem mensagem = new Mensagem();
+        mensagem.setRemetente("devteste1963@gmail.com");
+        mensagem.setDestinatarios(Arrays.asList("brunoliracz@gmail.com"));
+        mensagem.setAssunto("teste");
+//        map.put("Name", request.getName());
+        map.put("location", "br");
+        emailService.sendEmail(mensagem, map);
+        /* ---------teste email -----------*/
 
         model.addAttribute("pizzas", pizzaRepository.findAll());
         model.addAttribute("categorias", CategoriaPizza.values());

@@ -1,9 +1,12 @@
 package br.edu.exemploPizzaria.controller;
 
+import br.edu.exemploPizzaria.CorreiosClient;
 import br.edu.exemploPizzaria.model.*;
 import br.edu.exemploPizzaria.model.enumerators.CategoriaPizza;
 import br.edu.exemploPizzaria.model.repository.*;
 import br.edu.exemploPizzaria.propertyeditors.PizzaPropertyEditor;
+import br.edu.exemploPizzaria.soapclient.CalcPrecoPrazo;
+import br.edu.exemploPizzaria.soapclient.CalcPrecoPrazoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
@@ -48,6 +48,8 @@ public class PedidoController {
     CompraRepository compraRepository;
     @Autowired
     ClienteRepository clienteRepository;
+    @Autowired
+    private CorreiosClient correiosClient;
 
     @GetMapping("/adicionarpizza/{id}")
     public String adicionarPizza(@PathVariable Long id, Model model) {
@@ -213,6 +215,15 @@ public class PedidoController {
         model.addAttribute("total", total);
                 return exibirHome();
             }
+
+    @PostMapping("/frete")
+
+    public String frete(CalcPrecoPrazo precoPrazo){
+        System.out.println(precoPrazo.toString());
+        CalcPrecoPrazoResponse c = correiosClient.calcPrecoPrazo(precoPrazo);
+        System.out.println(c.toString());
+        return "ok";
+    }
 
 
 

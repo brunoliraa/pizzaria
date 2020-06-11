@@ -60,6 +60,19 @@
     <a href="/continuar">continuar comprando</a>
 </form>
 </div>
+
+<div>
+    <form method="post" action="frete">
+        <label for="frete">CEP</label>
+        <input type="number"  id="frete" name="sCepDestino">
+        <input type="hidden" value="1" name="nVlComprimento">
+        <input type="hidden" value="1" name="nVlAltura">
+        <input type="hidden" value="1" name="nVlLargura">
+        <input type="hidden" value="1" name="nVlDiametro">
+        <input type="hidden" value="100" name="nVlValorDeclarado">
+        <button type="submit">Enviar</button>
+     </form>
+</div>
 <div class="container">
     <form method="post"  action="/pay">
         <div class="col-50">

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb" if-exists="true" version="2.1">
+      
+    <!--
+
+Este arquivo foi gerado pela Arquitetura JavaTM para Implementação de Referência (JAXB) de Bind XML, v2.2.11 
+Consulte <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
+Gerado em: 2020.04.02 às 12:00:24 PM BRT 
+
+  -->
+      
+    <bindings xmlns:tns="http://tempuri.org/" if-exists="true" scd="x-schema::tns">
+            
+        <schemaBindings map="false">
+                  
+            <package name="br.edu.exemploPizzaria.soapclient"/>
+                
+        </schemaBindings>
+            
+        <bindings if-exists="true" scd="tns:CalcPrecoPrazo">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CalcPrecoPrazo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:CalcPrecoPrazoResponse">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CalcPrecoPrazoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:cResultado">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CResultado"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:CalcPrecoPrazoData">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CalcPrecoPrazoData"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:CalcPrecoPrazoDataResponse">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CalcPrecoPrazoDataResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:CalcPrecoPrazoRestricao">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CalcPrecoPrazoRestricao"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:CalcPrecoPrazoRestricaoResponse">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CalcPrecoPrazoRestricaoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:CalcPreco">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CalcPreco"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:CalcPrecoResponse">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CalcPrecoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:CalcPrecoData">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CalcPrecoData"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:CalcPrecoDataResponse">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CalcPrecoDataResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:CalcPrazo">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CalcPrazo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:CalcPrazoResponse">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CalcPrazoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:CalcPrazoData">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CalcPrazoData"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:CalcPrazoDataResponse">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CalcPrazoDataResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:CalcPrazoRestricao">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CalcPrazoRestricao"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:CalcPrazoRestricaoResponse">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CalcPrazoRestricaoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:CalcPrecoFAC">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CalcPrecoFAC"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:CalcPrecoFACResponse">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CalcPrecoFACResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:CalcDataMaxima">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CalcDataMaxima"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:CalcDataMaximaResponse">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CalcDataMaximaResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:cResultadoObjeto">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CResultadoObjeto"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:ListaServicos">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.ListaServicos"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:ListaServicosResponse">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.ListaServicosResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:cResultadoServicos">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CResultadoServicos"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:ListaServicosSTAR">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.ListaServicosSTAR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:ListaServicosSTARResponse">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.ListaServicosSTARResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:VerificaModal">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.VerificaModal"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:VerificaModalResponse">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.VerificaModalResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:cResultadoModal">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CResultadoModal"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getVersao">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.GetVersao"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getVersaoResponse">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.GetVersaoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:versao">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.Versao"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfCServico">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.ArrayOfCServico"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:cServico">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CServico"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfCObjeto">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.ArrayOfCObjeto"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:cObjeto">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CObjeto"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfCServicosCalculo">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.ArrayOfCServicosCalculo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:cServicosCalculo">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CServicosCalculo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfCModal">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.ArrayOfCModal"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:cModal">
+                  
+            <class ref="br.edu.exemploPizzaria.soapclient.CModal"/>
+                
+        </bindings>
+          
+    </bindings>
+    
+</bindings>

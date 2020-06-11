@@ -4,6 +4,7 @@ import br.edu.exemploPizzaria.model.Cliente;
 import br.edu.exemploPizzaria.model.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -32,6 +33,9 @@ public class MongoUserDetailsService implements UserDetailsService {
         //cliente.getAuthorities().add(new SimpleGrantedAuthority("cliente"));
         //return new Cliente(authorityList);
         //return new Cliente(cliente.getEmail(), cliente.getSenha());
+
+        //AuthorityUtils.createAuthorityList("ROLE_ADMIN");
+        //e passaria a lista no construtor de cliente
         return cliente;
     }
 }

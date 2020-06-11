@@ -10,7 +10,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Properties;
 
-@Configuration
+//@Configuration
 //@PropertySource("classpath:env/mail.properties")
 public class MailConfig {
 
@@ -18,7 +18,7 @@ public class MailConfig {
     private Environment env; //recebe os valores do properties
 
     //JavaMailSender facilita o envio de email
-    @Bean
+//    @Bean
     public JavaMailSender mailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl(); //implementação da JavaMailSender
 

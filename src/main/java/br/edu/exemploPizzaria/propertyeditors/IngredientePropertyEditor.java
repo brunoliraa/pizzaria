@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.beans.PropertyEditorSupport;
 
+//Spring data jpa já resolve esse problema de não salvar objeto dentro de outro objeto
 @Component
 public class IngredientePropertyEditor extends PropertyEditorSupport {
 

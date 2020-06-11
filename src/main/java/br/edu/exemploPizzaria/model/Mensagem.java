@@ -20,6 +20,10 @@ public class Mensagem {
         this.corpo = corpo;
     }
 
+    public Mensagem(){
+
+    }
+
     public String getRemetente() {
         return remetente;
     }
