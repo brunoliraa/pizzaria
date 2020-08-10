@@ -1,8 +1,7 @@
 package br.edu.exemploPizzaria.propertyeditors;
 
-import br.edu.exemploPizzaria.model.Ingrediente;
 import br.edu.exemploPizzaria.model.Pizza;
-import br.edu.exemploPizzaria.model.repository.PizzaRepository;
+import br.edu.exemploPizzaria.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

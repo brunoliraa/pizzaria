@@ -25,11 +25,8 @@
 </div>
 <div class="jumbotron">
 <form method="post" action="finalizarpedido">
-<label for="recebedor">Recebedor</label>
-<input type="text" id="recebedor" class="form-control" name="recebe">
-
-
-
+<!--<label for="recebedor">Recebedor</label>-->
+<!--<input type="text" id="recebedor" class="form-control" name="recebe">-->
 
     <table id="listapizzas" class="table table-bordered">
         <thead>
@@ -51,14 +48,15 @@
 
         </tbody>
   </table>
-    <p th:text="${cliente.getNome()}"></p>
+    <p>deseja finalizar a compra? <span th:text="${cliente.getNome()}"></span></p>
     <p th:text="${total}"> valor total</p>
     <p th:text="frete">frete: </p>
     <p th:text="valorTotal">valor total:</span> </p>
 
     <button class="btn btn-dark" type="submit"> Comprar </button>
-    <a href="/continuar">continuar comprando</a>
 </form>
+
+    <a href="/continuar">continuar comprando</a>
 </div>
 
 <div>
@@ -85,15 +83,15 @@
                 <i class="fa fa-cc-discover" style="color:orange;"></i>
             </div>
             <label for="price">Total</label>
-            <input type="text" id="price" name="price">
+            <input type="hidden" id="price"  value="50" name="price">
             <label for="currency">Currency</label>
-            <input type="text" id="currency" name="currency" placeholder="Enter Currency">
+            <input type="hidden" id="currency" value="BRL" name="currency" placeholder="Enter Currency">
             <label for="method">Payment Method</label>
-            <input type="text" id="method" name="method" placeholder="Payment Method">
+            <input type="hidden" id="method" name="method" value="paypal" placeholder="Payment Method">
             <label for="intent">Intent</label>
-            <input type="text" id="intent" name="intent" value="sale">
+            <input type="hidden" id="intent" name="intent"  value="sale">
             <label for="description">Payment Description</label>
-            <input type="text" id="description" name="description" placeholder="Payment Description">
+            <input type="hidden" id="description" name="description" value="payment with paypal" placeholder="Payment Description">
 
         </div>
 

@@ -2,7 +2,7 @@ package br.edu.exemploPizzaria;
 
 
 import br.edu.exemploPizzaria.model.Ingrediente;
-import br.edu.exemploPizzaria.model.repository.IngredienteRepository;
+import br.edu.exemploPizzaria.repository.IngredienteRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.Rule;
 import org.junit.Test;

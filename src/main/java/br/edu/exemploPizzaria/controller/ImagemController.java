@@ -1,7 +1,7 @@
 package br.edu.exemploPizzaria.controller;
 
 import br.edu.exemploPizzaria.model.Imagem;
-import br.edu.exemploPizzaria.model.repository.ImagemRepository;
+import br.edu.exemploPizzaria.repository.ImagemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

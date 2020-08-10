@@ -3,7 +3,7 @@ package br.edu.exemploPizzaria.controller;
 
 import br.edu.exemploPizzaria.model.Compra;
 import br.edu.exemploPizzaria.model.Ingrediente;
-import br.edu.exemploPizzaria.model.repository.CompraRepository;
+import br.edu.exemploPizzaria.repository.CompraRepository;
 import br.edu.exemploPizzaria.propertyeditors.PizzaPropertyEditor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +31,7 @@ public class CompraController {
     @PostMapping("/comprar")
     public String salvarCompra(Compra compra){
         compraRepository.save(compra);
-        return "ok";
+        return "carrinho";
     }
 
     @InitBinder

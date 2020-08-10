@@ -2,13 +2,12 @@ package br.edu.exemploPizzaria;
 
 
 import br.edu.exemploPizzaria.model.Ingrediente;
-import br.edu.exemploPizzaria.model.repository.IngredienteRepository;
+import br.edu.exemploPizzaria.repository.IngredienteRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;

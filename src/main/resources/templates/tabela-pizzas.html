@@ -17,7 +17,7 @@
         <td th:text="${pizzas.nome}"></td>
         <td th:text="${pizzas.preco}"></td>
         <td th:text="${pizzas.categoria}"></td>
-        <td><span th:each="ingredientes : ${pizzas.ingredientes}" th:text="${ingredientes.toString()}"></span></td>
+        <td><span th:each="ingredientes : ${pizzas.ingredientes}"><span th:text="${ingredientes.nome}"></span></span></td>
         <td><button type="button" class="btn btn-warning btn-editar">Editar</button></td>
         <td><button type="button" class="btn btn-danger btn-deletar"> Deletar </button> </td>
     </tr>

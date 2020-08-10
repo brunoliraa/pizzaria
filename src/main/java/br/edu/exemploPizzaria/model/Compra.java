@@ -3,6 +3,7 @@ package br.edu.exemploPizzaria.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class Compra {
     private String formaPagamento;
     private BigDecimal valor;
     private BigDecimal frete;
+    private BigInteger clienteId;
 
     private BigDecimal valorTotal;
     @ManyToMany(fetch = FetchType.EAGER)
@@ -87,5 +89,13 @@ public class Compra {
 
     public void setDataCompra(LocalDateTime dataCompra) {
         this.dataCompra = dataCompra;
+    }
+
+    public BigInteger getClienteId() {
+        return clienteId;
+    }
+
+    public void setClienteId(BigInteger clienteId) {
+        this.clienteId = clienteId;
     }
 }

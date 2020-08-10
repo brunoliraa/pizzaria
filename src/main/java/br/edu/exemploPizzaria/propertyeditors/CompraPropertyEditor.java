@@ -1,6 +1,6 @@
 package br.edu.exemploPizzaria.propertyeditors;
 
-import br.edu.exemploPizzaria.model.repository.CompraRepository;
+import br.edu.exemploPizzaria.repository.CompraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.beans.PropertyEditorSupport;

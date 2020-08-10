@@ -1,4 +1,4 @@
-package br.edu.exemploPizzaria;
+package br.edu.exemploPizzaria.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

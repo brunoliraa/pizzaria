@@ -1,4 +1,4 @@
-package br.edu.exemploPizzaria;
+package br.edu.exemploPizzaria.config;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.MessageSource;

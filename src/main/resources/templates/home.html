@@ -65,7 +65,8 @@
                 <td th:text="${pizzas.nome}"></td>
                 <td th:text="${pizzas.preco}"></td>
                 <td th:text="${pizzas.categoria}"></td>
-                <td><span th:each="ingredientes : ${pizzas.ingredientes}" th:text="${ingredientes.toString()}"></span></td>
+                <td><span th:each="ingredientes : ${pizzas.ingredientes}" > <span th:text="${ingredientes.nome}"></span></span></td>
+
                 <td><a class="btn btn-secondary" th:href="@{/adicionarpizza/{id}(id=${pizzas.id})}"  role="button">Selecionar</a></td>
 
 
@@ -76,7 +77,7 @@
             </tbody>
 
         </table>
-        <a class="btn btn-dark" href="/carrinho" >Finalizar pedido</a>
+        <a class="btn btn-dark" href="/carrinho" >ir para o carrinho</a>
     </div>
 </div>
 

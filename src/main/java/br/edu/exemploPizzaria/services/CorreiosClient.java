@@ -1,4 +1,4 @@
-package br.edu.exemploPizzaria;
+package br.edu.exemploPizzaria.services;
 
 import br.edu.exemploPizzaria.soapclient.CalcPrecoPrazo;
 import br.edu.exemploPizzaria.soapclient.CalcPrecoPrazoResponse;

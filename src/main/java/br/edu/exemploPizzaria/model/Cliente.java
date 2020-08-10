@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,7 +21,7 @@ import java.util.List;
 
 @Document(collection = "cliente")
 
-public class Cliente implements UserDetails {
+public class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private BigInteger id;
@@ -32,12 +33,7 @@ public class Cliente implements UserDetails {
     @Size(min = 6,message = "minimo de 6 caracteres")
     private String senha;
 
-    public Cliente(){};
 
-    public Cliente(String email, String senha){
-        this.email = email;
-        this.senha = senha;
-    }
 
     public BigInteger getId() {
         return id;
@@ -81,43 +77,4 @@ public class Cliente implements UserDetails {
                 '}';
     }
 
-
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("cliente"));
-        authorities.add(new SimpleGrantedAuthority("admin"));
-        return authorities;
-    }
-
-    @Override
-    public String getPassword() {
-        return this.getSenha();
-    }
-
-    @Override
-    public String getUsername() {
-        return this.getEmail();
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }

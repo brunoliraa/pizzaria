@@ -1,4 +1,4 @@
-package br.edu.exemploPizzaria.model.repository;
+package br.edu.exemploPizzaria.repository;
 
 import br.edu.exemploPizzaria.model.Cliente;
 import org.springframework.data.mongodb.repository.MongoRepository;

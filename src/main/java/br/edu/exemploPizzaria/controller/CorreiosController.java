@@ -1,6 +1,6 @@
 package br.edu.exemploPizzaria.controller;
 
-import br.edu.exemploPizzaria.CorreiosClient;
+import br.edu.exemploPizzaria.services.CorreiosClient;
 import br.edu.exemploPizzaria.soapclient.CalcPrecoPrazo;
 import br.edu.exemploPizzaria.soapclient.CalcPrecoPrazoResponse;
 import org.springframework.beans.factory.annotation.Autowired;

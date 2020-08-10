@@ -1,4 +1,4 @@
-package br.edu.exemploPizzaria;
+package br.edu.exemploPizzaria.config;
 
 import br.edu.exemploPizzaria.services.MongoUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,18 +15,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.sql.DataSource;
+
 
 @Configuration
 @EnableWebSecurity//(debug = true)
-//@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true) //nao sei
-//@EnableConfigurationProperties
-//@Order(1)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
-    @Autowired
-    private DataSource dataSource;
 
     @Autowired
     private MongoUserDetailsService mongoUserDetailsService;
@@ -36,45 +30,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //auth.inMemoryAuthentication().withUser("admin@admin.com").password("admin").roles("cliente");
         auth.userDetailsService(mongoUserDetailsService).passwordEncoder(bCryptPasswordEncoder());
 
-
-
-
-
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //http.authorizeRequests().antMatchers("/login", "/cliente").hasRole("cliente").
         http.csrf().disable()
-                .authorizeRequests() //pra começar a configurar as requisições
-                .antMatchers("/ingrediente").hasAuthority("cliente")
-                .antMatchers("/pizza").hasAuthority("admin")
+                .authorizeRequests()
+                .antMatchers("/pizza").hasAuthority("cliente")
+                .antMatchers("/ingrediente").hasAuthority("admin")
                 .anyRequest().permitAll()
                 .and().formLogin()
                 .loginPage("/pizzaria").loginProcessingUrl("/autenticar").defaultSuccessUrl("/home").failureUrl("/pizzaria?erro")
                 .usernameParameter("email").passwordParameter("senha")
                 .and().logout()
                 .logoutUrl("/logout").logoutSuccessUrl("/pizzaria");
-
-//
-//        http.csrf().disable()
-//                .authorizeRequests().antMatchers("/ingrediente").hasRole("admin")
-//                .anyRequest().permitAll()
-//                .and()
-//                .formLogin().loginPage("/pizzaria")
-//                .loginProcessingUrl("/autenticar").defaultSuccessUrl("/home").failureUrl("/pizza")
-//                .usernameParameter("email").passwordParameter("senha")
-//                .and()
-//                .logout()
-//                .logoutSuccessUrl("/pizza");
-
-//        http.csrf().disable().authorizeRequests()
-//                .antMatchers("/ingrediente").hasRole("admin")
-//                .antMatchers("/pizza").hasRole("cliente")
-//                .and()
-//                .formLogin().failureUrl("/pizzaria")
-//                .loginProcessingUrl("/autenticar").defaultSuccessUrl("/home");
-//                //.usernameParameter("email").passwordParameter("senha");
 
     }
 

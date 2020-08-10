@@ -1,21 +1,20 @@
 package br.edu.exemploPizzaria.services;
 
 import br.edu.exemploPizzaria.model.Cliente;
-import br.edu.exemploPizzaria.model.repository.ClienteRepository;
+import br.edu.exemploPizzaria.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 
-@Component
+@Service
 public class MongoUserDetailsService implements UserDetailsService {
 
     @Autowired
@@ -28,14 +27,8 @@ public class MongoUserDetailsService implements UserDetailsService {
         if(cliente ==null){
             throw new UsernameNotFoundException("cliente não encontrado");
         }
-        //List<GrantedAuthority> authorityList = Arrays.asList(new SimpleGrantedAuthority("cliente"));
-        //GrantedAuthority authority = new SimpleGrantedAuthority("cliente");
-        //cliente.getAuthorities().add(new SimpleGrantedAuthority("cliente"));
-        //return new Cliente(authorityList);
-        //return new Cliente(cliente.getEmail(), cliente.getSenha());
+        List<GrantedAuthority> authorityList = AuthorityUtils.createAuthorityList("cliente");
 
-        //AuthorityUtils.createAuthorityList("ROLE_ADMIN");
-        //e passaria a lista no construtor de cliente
-        return cliente;
+        return new User(cliente.getEmail(), cliente.getSenha(),authorityList);
     }
 }
