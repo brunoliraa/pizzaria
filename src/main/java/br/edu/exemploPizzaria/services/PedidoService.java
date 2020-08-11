@@ -48,7 +48,7 @@ public class PedidoService {
     @Autowired
     private CorreiosClient correiosClient;
 
-    public ModelAndView adicionarPizza(@PathVariable Long id) {
+    public String adicionarPizza(@PathVariable Long id) {
         Pizza p = pizzaRepository.findPizzaById(id);
         buscarUsuarioLogado();
         int quantidade =0;
@@ -68,7 +68,7 @@ public class PedidoService {
 
             lista.add(p);
         }
-        return voltarHome();
+        return "redirect:/home";
     }
 
 
@@ -104,7 +104,7 @@ public class PedidoService {
         return modelAndView;
     }
 
-    public ModelAndView alterarQuantidade(@PathVariable Long id, @PathVariable Integer acao) {
+    public String alterarQuantidade(@PathVariable Long id, @PathVariable Integer acao) {
         for (Pizza p : lista) {
             if (p.getId().equals(id)) {
                 if (acao == 1) {
@@ -129,10 +129,10 @@ public class PedidoService {
             }
         }
 
-        return exibirCarrinho();
+        return "redirect:/carrinho";
     }
 
-    public ModelAndView removerPizza(@PathVariable Long id) {
+    public String removerPizza(@PathVariable Long id) {
         Pizza pizza = pizzaRepository.findPizzaById(id);
         int quantidade=1;
         for(Pizza p : lista){
@@ -155,7 +155,7 @@ public class PedidoService {
             total = new BigDecimal(0);
         }
 
-        return exibirCarrinho();
+        return "redirect:/carrinho";
     }
 
     private void buscarUsuarioLogado(){

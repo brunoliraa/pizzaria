@@ -23,81 +23,184 @@
 
     </div>
 </div>
-<div class="jumbotron">
-<form method="post" action="finalizarpedido">
-<!--<label for="recebedor">Recebedor</label>-->
-<!--<input type="text" id="recebedor" class="form-control" name="recebe">-->
 
-    <table id="listapizzas" class="table table-bordered">
-        <thead>
-        <tr>
-            <th>Pizza</th>
+<!-- começando novo carrinho -->
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each=" pizzas : ${listaPizzas}" name="listaPizza" th:attr="data-id=${pizzas.id}">
-            <td th:text="${pizzas.nome}"></td>
-            <td th:text="${pizzas.quantidade}"></td>
-            <td th:text="${pizzas.preco}"></td>
-            <td><a class="btn btn-secondary" th:href="@{/alterarQuantidade/{id}/{acao}(id=${pizzas.id},acao=${1})}"  role="button">+</a>
-                <a class="btn btn-secondary" th:href="@{/alterarQuantidade/{id}/{acao}(id=${pizzas.id},acao=${0})}"  role="button">-</a></td>
-            <td><a class="btn btn-danger" th:href="@{/removerPizza/{id}(id=${pizzas.id})}"  role="button">remove</a></td>
+<!--Main layout-->
+<main class="mt-5 pt-4">
+    <div class="container wow fadeIn">
 
-        </tr>
+        <!-- Heading -->
+        <h2 class="my-5 h2 text-center">Informações de pagamento</h2>
+        <p>Pague para finalizar o pedido <span th:text="${cliente.nome}"></span></p>
 
-        </tbody>
-  </table>
-    <p>deseja finalizar a compra? <span th:text="${cliente.getNome()}"></span></p>
-    <p th:text="${total}"> valor total</p>
-    <p th:text="frete">frete: </p>
-    <p th:text="valorTotal">valor total:</span> </p>
+        <!--Grid row-->
+        <div class="row">
 
-    <button class="btn btn-dark" type="submit"> Comprar </button>
-</form>
 
-    <a href="/continuar">continuar comprando</a>
-</div>
+            <!--Grid column-->
+            <div class="col-md-8 mb-4">
+                <form action="/finalizarpedido" method="POST">
 
-<div>
-    <form method="post" action="frete">
-        <label for="frete">CEP</label>
-        <input type="number"  id="frete" name="sCepDestino">
-        <input type="hidden" value="1" name="nVlComprimento">
-        <input type="hidden" value="1" name="nVlAltura">
-        <input type="hidden" value="1" name="nVlLargura">
-        <input type="hidden" value="1" name="nVlDiametro">
-        <input type="hidden" value="100" name="nVlValorDeclarado">
-        <button type="submit">Enviar</button>
-     </form>
-</div>
-<div class="container">
-    <form method="post"  action="/pay">
-        <div class="col-50">
-            <h3>Payment</h3>
-            <label>Accepted Cards</label>
-            <div class="icon-container">
-                <i class="fa fa-cc-visa" style="color:navy;"></i>
-                <i class="fa fa-cc-amex" style="color:blue;"></i>
-                <i class="fa fa-cc-mastercard" style="color:red;"></i>
-                <i class="fa fa-cc-discover" style="color:orange;"></i>
+                <!--Card-->
+                <div class="card">
+
+                    <!--Card content-->
+                    <form class="card-body">
+
+                        <!--Grid row-->
+                        <div class="row">
+
+                            <!--Grid column-->
+                            <div class="col-md-6 mb-2">
+
+                                <!--firstName-->
+                                <div class="md-form ">
+                                    <input type="text" id="firstName" class="form-control">
+                                    <label for="firstName" class="">nome</label>
+                                </div>
+
+                            </div>
+                            <!--Grid column-->
+
+                            <!--Grid column-->
+                            <div class="col-md-6 mb-2">
+
+                                <!--lastName-->
+                                <div class="md-form">
+                                    <input type="text" id="lastName" class="form-control">
+                                    <label for="lastName" class="">sobrenome</label>
+                                </div>
+
+                            </div>
+                            <!--Grid column-->
+
+                        </div>
+                        <!--Grid row-->
+                        <!--email-->
+                        <div class="md-form mb-5">
+                            <input type="text" id="email" th:value="${cliente.email}" class="form-control" placeholder="youremail@example.com">
+                            <label for="email" class="">Email</label>
+                        </div>
+                        <!--address-->
+                        <div class="md-form mb-5">
+                            <input type="text" id="address" class="form-control" placeholder="rua exemplo, 47">
+                            <label for="address" class="">endereço de entrega</label>
+                        </div>
+                        <hr>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="save-info">
+                            <label class="custom-control-label" for="save-info">Save informação para próxima compra</label>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="cc-name">nome no cartao</label>
+                                <input type="text" class="form-control" id="cc-name" placeholder="" >
+                                <small class="text-muted">nome igual escrito no cartão</small>
+                                <div class="invalid-feedback">
+                                    nome é necessário
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cc-number">número do cartão</label>
+                                <input type="text" class="form-control" id="cc-number" placeholder="" >
+                                <div class="invalid-feedback">
+                                    número do cartão é necessário
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <label for="cc-expiration">data de expiração</label>
+                                <input type="text" class="form-control" id="cc-expiration" placeholder="" >
+                                <div class="invalid-feedback">
+                                    data de expiração é necessária
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="cc-expiration">CVV</label>
+                                <input type="text" class="form-control" id="cc-cvv" placeholder="" >
+                                <div class="invalid-feedback">
+                                    cvv é necessário
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="mb-4">
+                        <button class="btn btn-primary btn-lg btn-block" type="submit">finalizar pedido</button>
+                    </form>
+
+                    <a class="btn btn-secondary" href="/continuar" role="button">continuar comprando</a>
+
+                    <div class="container">
+                        <form method="post"  action="/pay">
+                            <div class="col-50">
+                                <input type="hidden" id="price"  th:value="${total}" name="price">
+                                <input type="hidden" id="currency" value="BRL" name="currency" placeholder="Enter Currency">
+                                <input type="hidden" id="method" name="method" value="paypal" placeholder="Payment Method">
+                                <input type="hidden" id="intent" name="intent"  value="sale">
+                                <input type="hidden" id="description" name="description" value="payment with paypal" placeholder="Payment Description">
+                            </div>
+                            <button type="submit"> <img src="./img/paypal.png" alt="paypal" style="width: 100px;height: 50px"></button>
+                        </form>
+                    </div>
+
+                </div>
+                <!--/.Card-->
+
             </div>
-            <label for="price">Total</label>
-            <input type="hidden" id="price"  value="50" name="price">
-            <label for="currency">Currency</label>
-            <input type="hidden" id="currency" value="BRL" name="currency" placeholder="Enter Currency">
-            <label for="method">Payment Method</label>
-            <input type="hidden" id="method" name="method" value="paypal" placeholder="Payment Method">
-            <label for="intent">Intent</label>
-            <input type="hidden" id="intent" name="intent"  value="sale">
-            <label for="description">Payment Description</label>
-            <input type="hidden" id="description" name="description" value="payment with paypal" placeholder="Payment Description">
+            <!--Grid column-->
 
+            <!--Grid column-->
+            <div class="col-md-4 mb-4">
+
+                <!-- Heading -->
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Seu pedido</span>
+                    <span class="badge badge-secondary badge-pill" th:text="${listaPizzas.size()}"></span>
+                </h4>
+
+                <!-- Cart -->
+                <ul class="list-group mb-3 z-depth-1" th:each=" pizza : ${listaPizzas}" name="listaPizza">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0" th:text="${pizza.nome}"></h6>
+                            <small class="text-muted">tamanho <span th:text="${pizza.categoria}"></span></small>
+                        </div>
+                        <span class="text-muted" th:text="${pizza.preco}"></span>
+                        <div>
+                            <span><a class="btn btn-secondary" th:href="@{/alterarQuantidade/{id}/{acao}(id=${pizza.id},acao=${1})}"  role="button">+</a></span>
+                            <span><a class="btn btn-secondary" th:href="@{/alterarQuantidade/{id}/{acao}(id=${pizza.id},acao=${0})}"  role="button">-</a></span>
+                            <span> <a class="btn btn-danger" th:href="@{/removerPizza/{id}(id=${pizza.id})}"  role="button">remove</a> </span>
+
+                        </div>
+                    </li>
+                </ul>
+                <ul class="list-group mb-3 z-depth-1">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>valor da entrega</span>
+                        <strong>R$ 4</strong>
+                    </li>
+
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Total</span>
+                        <strong th:text="${total + 4}"></strong>
+                    </li>
+                </ul>
+                <!-- Cart -->
+
+            </div>
+            <!--Grid column-->
         </div>
+        <!--Grid row-->
 
-        <input type="submit" value="Continue to checkout" class="btn">
-    </form>
-</div>
+    </div>
+</main>
+<!--Main layout-->
+<!-- final carrinho -->
+
 
 <footer>
     <div class="row justify-content-center">
@@ -115,7 +218,6 @@
     </div>
 
 </footer>
-
 
 </body>
 </html>

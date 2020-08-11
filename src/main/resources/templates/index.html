@@ -14,6 +14,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
 
 </head>
 <body>
@@ -23,7 +24,7 @@
         <a href="#home" class="w3-bar-item w3-button">Pizza's Bar</a>
         <!-- Right-sided navbar links. Hide them on small screens -->
         <div class="w3-right w3-hide-small">
-            <a href="http://localhost:8080/pizzaria?lang=pt" class="w3-bar-item w3-button nav-bar-item">Menu</a>
+            <a href="#menu" class="w3-bar-item w3-button nav-bar-item">Menu</a>
             <a href="" class="w3-bar-item w3-button nav-bar-item" data-toggle="modal" data-target="#modalLogin">Login</a>
             <a href="" class="w3-bar-item w3-button nav-bar-item" data-toggle="modal" data-target="#modalCadastrar">Cadastre-se</a>
         </div>
@@ -52,6 +53,27 @@
         <p class="w3-large w3-text-grey w3-hide-medium">Augue mauris augue neque gravida in fermentum. Nisl rhoncus mattis rhoncus urna neque viverra.</p>
     </div>
 </div>
+<hr>
+<!-- end about section -->
+
+<!-- Menu Container -->
+<div class="w3-container  w3-padding-64 w3-xxlarge" id="menu">
+    <div class="w3-content">
+
+        <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">MENU</h1>
+        <div class="w3-row w3-center w3-border w3-border-dark-grey"></div>
+        <div th:each="pizza : ${pizzas}">
+            <div id="Pizza"  class="w3-container menu w3-padding-32 w3-white">
+                <h1><b th:text="${pizza.nome}"></b> <span class="w3-right w3-tag w3-dark-grey w3-round" th:text="${pizza.preco}"></span></h1>
+                <h3> <span th:each="ingrediente : ${pizza.ingredientes}" > <span class="w3-text-grey" th:text="${ingrediente.nome}"></span></span></h3>
+                <hr>
+            </div>
+        </div>
+
+    </div>
+</div>
+<hr>
+<!-- final do meu container -->
 
 <!-- Modal Login -->
 <div class="modal fade" id="modalLogin">

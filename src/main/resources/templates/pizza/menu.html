@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>menu</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 
@@ -13,7 +13,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
-
 </head>
 <body>
 
@@ -23,60 +22,30 @@
         <a href="#home" class="w3-bar-item w3-button">Pizza's Bar</a>
 
         <div class="w3-right w3-hide-small">
+            <a href="/home" class="w3-bar-item w3-button nav-bar-item" >Home</a>
             <a href="" class="w3-bar-item w3-button nav-bar-item" >Meus pedidos</a>
             <a href="/logout" class="w3-bar-item w3-button nav-bar-item">Logout</a>
         </div>
     </div>
 </div>
 
+<!-- Menu Container -->
+<div class="w3-container w3-black w3-padding-64 w3-xxlarge" id="menu">
+    <div class="w3-content">
 
-<div class="w3-row w3-padding-64" id="menu">
-    <div class="w3-col l6 w3-padding-large">
-        <h1 class="w3-center">Menu</h1><br>
-        <h4>Calabresa</h4>
-        <p class="w3-text-grey">Lorem ipsum dolor sit amet</p><br>
+        <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">MENU</h1>
+        <div class="w3-row w3-center w3-border w3-border-dark-grey"></div>
+        <div th:each="pizza : ${pizzas}">
+            <div id="Pizza"  class="w3-container menu w3-padding-32 w3-white">
+                <h1><b th:text="${pizza.nome}"></b> <span class="w3-right w3-tag w3-dark-grey w3-round" th:text="${pizza.preco}"></span></h1>
+                <h3> <span th:each="ingrediente : ${pizza.ingredientes}" > <span class="w3-text-grey" th:text="${ingrediente.nome}"></span></span></h3>
+                <hr>
+            </div>
+        </div>
 
-        <h4>Mussarela</h4>
-        <p class="w3-text-grey">Lorem ipsum dolor sit amet</p><br>
-
-        <h4>Frango imperial</h4>
-        <p class="w3-text-grey">Lorem ipsum dolor sit amet</p><br>
-
-        <h4>Marguerita</h4>
-        <p class="w3-text-grey">Lorem ipsum dolor sit amet</p><br>
-
-        <h4>Moda da casa</h4>
-        <p class="w3-text-grey">Lorem ipsum dolor sit amet</p>
-    </div>
-
-    <div class="w3-col l6 w3-padding-large">
-
-
-        <table id="pizzas" class="table table-bordered">
-            <thead>
-            <tr>
-                <th>nome</th>
-                <th>Preço</th>
-                <th>categoria</th>
-                <th>Ingredientes</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="pizzas : ${pizzas}" th:attr="data-id=${pizzas.id}">
-                <td th:text="${pizzas.nome}"></td>
-                <td th:text="${pizzas.preco}"></td>
-                <td th:text="${pizzas.categoria}"></td>
-                <td><span th:each="ingredientes : ${pizzas.ingredientes}" > <span th:text="${ingredientes.nome}"></span></span></td>
-
-                <td><a class="btn btn-secondary" th:href="@{/adicionarpizza/{id}(id=${pizzas.id})}"  role="button">Selecionar</a></td>
-            </tr>
-            </tbody>
-
-        </table>
-        <a class="btn btn-dark" href="/carrinho" >ir para o carrinho</a>
     </div>
 </div>
-
+<!-- final do meu container -->
 
 <footer>
     <div class="row justify-content-center">

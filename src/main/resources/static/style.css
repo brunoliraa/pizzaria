@@ -13,11 +13,16 @@ h1, h2, h3, h4, h5, h6 {
     color:#ffffff;
 }
 
+.menu h1,h2,h3,h4,h5,h6 {
+    font-family: "Amatic SC", sans-serif;
+    margin-bottom: 0;
+}
+
 footer{
     background-color:#202020;
     color:white;
     padding: 2rem 0 3rem;
-    margin-top:1rem;
+    margin-top:0;
 }
 footer img{
     height:3rem;

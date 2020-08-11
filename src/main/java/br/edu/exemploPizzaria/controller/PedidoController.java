@@ -15,7 +15,7 @@ public class PedidoController {
    private PedidoService pedidoService;
 
     @GetMapping("/adicionarpizza/{id}")
-    public ModelAndView adicionarPizza(@PathVariable Long id, Model model) {
+    public String adicionarPizza(@PathVariable Long id, Model model) {
        return pedidoService.adicionarPizza(id);
     }
 
@@ -35,12 +35,12 @@ public class PedidoController {
     }
 
     @GetMapping("/alterarQuantidade/{id}/{acao}")
-    public ModelAndView alterarQuantidade(@PathVariable Long id, @PathVariable Integer acao) {
+    public String alterarQuantidade(@PathVariable Long id, @PathVariable Integer acao) {
             return pedidoService.alterarQuantidade(id, acao);
         }
 
     @GetMapping("/removerPizza/{id}")
-    public ModelAndView removerPizza(@PathVariable Long id) {
+    public String removerPizza(@PathVariable Long id) {
         return pedidoService.removerPizza(id);
     }
 
