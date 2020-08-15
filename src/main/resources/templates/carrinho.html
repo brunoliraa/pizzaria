@@ -32,16 +32,12 @@
 
         <!-- Heading -->
         <h2 class="my-5 h2 text-center">Informações de pagamento</h2>
-        <p>Pague para finalizar o pedido <span th:text="${cliente.nome}"></span></p>
-
+        <p>Preenche as informações para finalizar o pedido <span th:text="${cliente.nome}"></span></p>
         <!--Grid row-->
         <div class="row">
-
-
             <!--Grid column-->
             <div class="col-md-8 mb-4">
                 <form action="/finalizarpedido" method="POST">
-
                 <!--Card-->
                 <div class="card">
 
@@ -84,9 +80,12 @@
                         </div>
                         <!--address-->
                         <div class="md-form mb-5">
-                            <input type="text" id="address" class="form-control" placeholder="rua exemplo, 47">
                             <label for="address" class="">endereço de entrega</label>
+                            <input type="text" id="address" name="enderecoEntrega" class="form-control" placeholder="rua exemplo, 47">
                         </div>
+
+<!--                        <input th:type="hidden" th:name="clienteId" th:value="${cliente.id}">-->
+
                         <hr>
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="save-info">
@@ -128,12 +127,17 @@
                                 </div>
                             </div>
                         </div>
+
                         <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block" type="submit">finalizar pedido</button>
+                        <button class="btn btn-primary btn-lg btn-block col-md-4" type="submit">finalizar pedido</button>
                     </form>
 
-                    <a class="btn btn-secondary" href="/continuar" role="button">continuar comprando</a>
 
+
+                    <hr>
+                    <div>
+                    <a class="btn btn-secondary col-md-4" href="/continuar" role="button">continuar comprando</a>
+                    <p>Pagar com paypal</p>
                     <div class="container">
                         <form method="post"  action="/pay">
                             <div class="col-50">
@@ -143,10 +147,11 @@
                                 <input type="hidden" id="intent" name="intent"  value="sale">
                                 <input type="hidden" id="description" name="description" value="payment with paypal" placeholder="Payment Description">
                             </div>
-                            <button type="submit"> <img src="./img/paypal.png" alt="paypal" style="width: 100px;height: 50px"></button>
+                            <button type="submit"> <img src="./img/paypal.png" alt="paypal" style="width: 100px;height: 50px; float: right">
+                            </button>
                         </form>
                     </div>
-
+                    </div>
                 </div>
                 <!--/.Card-->
 

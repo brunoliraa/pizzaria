@@ -56,12 +56,8 @@ public class ClienteController {
 
 
         @GetMapping("/home")
-        public ModelAndView irParaHome(){
-            ModelAndView model = new ModelAndView("home");
-            model.addObject("pizzas", pizzaRepository.findAll());
-            model.addObject("categorias", CategoriaPizza.values());
-            model.addObject("ingredientes", ingredienteRepository.findAll());
-            return model;
+        public ModelAndView irParaHome(HttpSession httpSession){
+         return clienteService.irParaHome(httpSession);
         }
 
 

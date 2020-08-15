@@ -13,19 +13,7 @@ public class Compra {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    private String recebe;
-
-    private String formaPagamento;
-    private BigDecimal valor;
-    private BigDecimal frete;
-    private BigInteger clienteId;
-
-    private BigDecimal valorTotal;
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Pizza> listaPizza;
-
-    private LocalDateTime dataCompra;
+    private Long pedidoId;
 
     public Long getId() {
         return id;
@@ -35,67 +23,11 @@ public class Compra {
         this.id = id;
     }
 
-    public String getRecebe() {
-        return recebe;
+    public Long getPedidoId() {
+        return pedidoId;
     }
 
-    public void setRecebe(String recebe) {
-        this.recebe = recebe;
-    }
-
-    public String getFormaPagamento() {
-        return formaPagamento;
-    }
-
-    public void setFormaPagamento(String formaPagamento) {
-        this.formaPagamento = formaPagamento;
-    }
-
-    public BigDecimal getValor() {
-        return valor;
-    }
-
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
-    }
-
-    public BigDecimal getFrete() {
-        return frete;
-    }
-
-    public void setFrete(BigDecimal frete) {
-        this.frete = frete;
-    }
-
-    public BigDecimal getValorTotal() {
-        return valorTotal;
-    }
-
-    public void setValorTotal(BigDecimal valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-
-    public List<Pizza> getListaPizza() {
-        return listaPizza;
-    }
-
-    public void setListaPizza(List<Pizza> listaPizza) {
-        this.listaPizza = listaPizza;
-    }
-
-    public LocalDateTime getDataCompra() {
-        return dataCompra;
-    }
-
-    public void setDataCompra(LocalDateTime dataCompra) {
-        this.dataCompra = dataCompra;
-    }
-
-    public BigInteger getClienteId() {
-        return clienteId;
-    }
-
-    public void setClienteId(BigInteger clienteId) {
-        this.clienteId = clienteId;
+    public void setPedidoId(Long pedidoId) {
+        this.pedidoId = pedidoId;
     }
 }

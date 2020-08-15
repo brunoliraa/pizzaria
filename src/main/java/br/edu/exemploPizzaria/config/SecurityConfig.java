@@ -36,14 +36,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/pizza").hasAuthority("cliente")
+                .antMatchers("/pizza", "/carrinho").hasAuthority("cliente")
                 .antMatchers("/ingrediente").hasAuthority("admin")
                 .anyRequest().permitAll()
                 .and().formLogin()
                 .loginPage("/pizzaria").loginProcessingUrl("/autenticar").defaultSuccessUrl("/home").failureUrl("/pizzaria?erro")
                 .usernameParameter("email").passwordParameter("senha")
                 .and().logout()
-                .logoutUrl("/logout").logoutSuccessUrl("/pizzaria");
+                .logoutUrl("/logout").logoutSuccessUrl("/pizzaria?logout=true");
 
     }
 

@@ -27,11 +27,6 @@ import java.util.List;
 @Service
 public class PedidoService {
 
-    private Pedido pedido;
-    private Compra compra;
-    private BigDecimal total = new BigDecimal(0);
-    private List<Pizza> lista = new ArrayList<>();
-    private Cliente cliente;
     @Autowired
     PizzaRepository pizzaRepository;
     @Autowired
@@ -40,13 +35,18 @@ public class PedidoService {
     PedidoRepository pedidoRepository;
     @Autowired
     PizzaPropertyEditor pizzaPropertyEditor;
-
     @Autowired
     CompraRepository compraRepository;
     @Autowired
     ClienteRepository clienteRepository;
     @Autowired
     private CorreiosClient correiosClient;
+
+    private Pedido pedido;
+    private Compra compra;
+    private BigDecimal total = new BigDecimal(0);
+    private List<Pizza> lista = new ArrayList<>();
+    private Cliente cliente;
 
     public String adicionarPizza(@PathVariable Long id) {
         Pizza p = pizzaRepository.findPizzaById(id);
@@ -73,14 +73,11 @@ public class PedidoService {
 
 
     @PostMapping("/finalizarpedido")
-    public ModelAndView finalizarPedido() {
+    public ModelAndView finalizarPedido(Pedido pedido) {
             ModelAndView modelAndView = new ModelAndView("pedidoFinalizado");
-            compra = new Compra();
-            compra.setDataCompra(LocalDateTime.now());
-            compra.setListaPizza(lista);
-            compra.setValorTotal(total);
-            compraRepository.save(compra);
-            modelAndView.addObject("listaPizzas", compra.getListaPizza());
+
+//            pedidoRepository.save(pedido);
+
             return modelAndView;
 
     }

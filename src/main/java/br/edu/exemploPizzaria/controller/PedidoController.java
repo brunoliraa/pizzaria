@@ -1,4 +1,5 @@
 package br.edu.exemploPizzaria.controller;
+import br.edu.exemploPizzaria.model.Pedido;
 import br.edu.exemploPizzaria.services.PedidoService;
 import br.edu.exemploPizzaria.soapclient.CalcPrecoPrazo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,8 @@ public class PedidoController {
     }
 
     @PostMapping("/finalizarpedido")
-    public ModelAndView finalizarPedido() {
-        return pedidoService.finalizarPedido();
+    public ModelAndView finalizarPedido(Pedido pedido) {
+        return pedidoService.finalizarPedido(pedido);
     }
 
     @GetMapping("/carrinho")

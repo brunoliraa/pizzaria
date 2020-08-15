@@ -11,8 +11,9 @@ public class Pedido {
     private Long id;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Pizza> pizzas;
+    private Long clienteId;
 
-    private String recebedor;
+    private String enderecoEntrega;
 
     public Long getId() {
         return id;
@@ -30,12 +31,20 @@ public class Pedido {
         this.pizzas = pizzas;
     }
 
-    public String getRecebedor() {
-        return recebedor;
+    public Long getClienteId() {
+        return clienteId;
     }
 
-    public void setRecebedor(String recebedor) {
-        this.recebedor = recebedor;
+    public void setClienteId(Long clienteId) {
+        this.clienteId = clienteId;
+    }
+
+    public String getEnderecoEntrega() {
+        return enderecoEntrega;
+    }
+
+    public void setEnderecoEntrega(String enderecoEntrega) {
+        this.enderecoEntrega = enderecoEntrega;
     }
 
     @Override
@@ -43,7 +52,8 @@ public class Pedido {
         return "Pedido{" +
                 "id=" + id +
                 ", pizzas=" + pizzas +
-                ", recebedor='" + recebedor + '\'' +
+                ", clienteId=" + clienteId +
+                ", enderecoEntrega='" + enderecoEntrega + '\'' +
                 '}';
     }
 }
