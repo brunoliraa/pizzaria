@@ -51,8 +51,8 @@ public class ClienteService {
         cliente.setSenha(new BCryptPasswordEncoder().encode(cliente.getSenha()));
         clienteRepository.save(cliente);
         session.setAttribute("cliente", cliente.getId());
-//        Jedis jedis =  new Jedis("127.0.0.1", 6379);
-//        jedis.set(cliente.getEmail(),session.getId(), SetParams.setParams());
+        Jedis jedis =  new Jedis("127.0.0.1", 6379);
+        jedis.set(cliente.getEmail(),session.getId(), SetParams.setParams());
 
         ModelAndView modelAndView = new ModelAndView("home");
         modelAndView.addObject("pizzas", pizzaRepository.findAll());
@@ -82,8 +82,8 @@ public class ClienteService {
         Cliente cliente = buscarUsuarioLogado()
                 .orElseThrow(()-> new UsernameNotFoundException("cliente nao encontrado"));
 
-//        Jedis jedis =  new Jedis("127.0.0.1", 6379);
-//        jedis.set(cliente.getEmail(),httpSession.getId(), SetParams.setParams());
+        Jedis jedis =  new Jedis("127.0.0.1", 6379);
+        jedis.set(cliente.getEmail(),httpSession.getId(), SetParams.setParams());
 
         ModelAndView model = new ModelAndView("home");
         model.addObject("pizzas", pizzaRepository.findAll());
@@ -107,8 +107,8 @@ public class ClienteService {
     /* ---------teste email -----------*/
 //    Map<String, Object> map = new HashMap<>();
 //    Mensagem mensagem = new Mensagem();
-//        mensagem.setRemetente("devteste1963@gmail.com");
-//        mensagem.setDestinatarios(Arrays.asList("devteste1963@outlook.com"));
+//        mensagem.setRemetente("remetente");
+//        mensagem.setDestinatarios(Arrays.asList("dest"));
 //        mensagem.setAssunto("teste");
 ////        map.put("Name", request.getName());
 //        map.put("location", "br");
